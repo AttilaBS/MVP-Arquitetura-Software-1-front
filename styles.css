@@ -1,0 +1,338 @@
+body,
+ul,
+li {
+    color: #333131;
+    font-family: tahoma;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: antiquewhite;
+}
+
+header {
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+.title {
+    color: #333131;
+    width: 100%;
+    background-color: #dd8888;
+    display: inline-block;
+    padding: 2px 0px;
+    position: sticky;
+    top: 0px;
+}
+
+.newReminder {
+    background-color: antiquewhite;
+    padding: 25px 0 25px 0;
+    color: white;
+	margin: 0 auto;
+}
+
+.newReminder h3 {
+    text-align: center;
+    color: #000;
+}
+
+.newReminderElement {
+    display: flex;
+    flex-direction: column;
+    height: 75px;
+}
+
+.itemsLine {
+    display: flex;
+}
+
+.justCenter {
+    justify-content: center;
+}
+
+.item-1 {
+    flex: 1;
+    text-align: center;
+    margin: 5px;
+}
+
+.item-2 {
+    text-align: center;
+    width: 20px;
+}
+
+.marginFirst {
+    margin-right: 10px;
+}
+
+.checkboxes {
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 5px 0 15px 0;
+}
+
+.newReminder input:nth-of-type(-n+3) {
+    height: 45px;
+}
+
+.newReminder label {
+    color: #000;
+    text-align: center;
+}
+
+.newReminder:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.aCheckbox {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.addBtn {
+    padding: 9px 10px;
+    background-color: #8bca93;
+    color: #333131;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.validator .addBtn:hover {
+    background-color: #2ab53a;
+    color: white;
+}
+
+.items {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.remove, .edit {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.remove:hover {
+    color: #f44336;
+    font-weight: bolder;
+}
+
+.edit:hover {
+    color: #65d819;
+    font-weight: bolder;
+}
+
+table,
+th,
+td {
+    color: #333131;
+    border: 1px solid #a17373;
+    border-collapse: collapse;
+    cursor: pointer;
+    position: relative;
+    padding: 15px 8px 15px 10px;
+    font-size: 18px;
+    transition: 0.2s;
+    text-align: start;
+}
+
+table {
+    background-color: white;
+    width: 70%;
+}
+
+th {
+    font-size: 17px;
+}
+
+tr:nth-child(odd){
+    background-color: #f3dddd;
+}
+
+tr:hover,
+tr:first-of-type {
+    background: #cda8a8;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+    margin-top: 15px;
+}
+
+footer span {
+    padding: 5px;
+}
+
+#myTable input[type=checkbox] {
+    width: 25px;
+    height: 30px;
+}
+
+.checkboxStyle {
+    text-align: center;
+}
+
+.emailElement {
+    display: none;
+    justify-content: center;
+    padding: 0 20px 20px 20px;
+}
+
+.emailElement input {
+    width: 50%;
+    text-align: center;
+}
+
+/* Modal styles */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000;
+    background-color: rgba(0,0,0,0.4);
+}
+  
+.modalContent {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 70%;
+}
+
+.close {
+    color: #000;
+    position: absolute;
+    right: 0;
+    margin-top: -30px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modalContainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#UpdId,
+#newId {
+    display: none;
+}
+
+.emailElementModal {
+    display: none;
+    justify-content: center;
+    padding: 0 20px 20px 20px;
+}
+
+#updEmail {
+    width: 50%;
+}
+
+.emailElementModal input {
+    text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+
+    body {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .emailElement input {
+        width: 100%;
+    }
+
+    table tr {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    table td {
+        width: 360px;
+        height: 30px;
+        text-align: center;
+    }
+
+    table th {
+        text-align: center;
+    }
+
+    #updEmail {
+        width: 100%;
+    }
+
+    td:first-of-type {
+        background-color: #dd8888;
+    }
+
+  }
+
+@media (min-width: 501px) {
+
+    .container {
+        display: flex;
+        max-width: 70%;
+        flex-direction: column;
+    }
+
+    table,
+    th,
+    td {
+        text-align: start;
+        text-align: left;
+    }
+
+    table td::before {
+        content: attr(label);
+        font-weight: bold;
+        width: 120px;
+        min-width: 120px;
+    }
+
+    /* Descrição */
+    th:nth-child(3) {
+        width: 60%;
+    }
+
+    /* Email */
+    th:nth-child(6){
+        width: 30%;
+    }
+}

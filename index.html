@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="static/favicon.png">
+        <link rel="stylesheet" href="styles.css">
+        <title>Lembretes</title>
+    </head>
+
+    <body class="validator">
+        <header>
+            <div class="title">
+                <h2>Lembretes</h2>
+            </div>
+        </header>
+        <section class="newReminder container wrap">
+            <div class="itemsLine">
+                <input type="number" id="newId" class="item-1">
+                <div class="item-1 newReminderElement">
+                    <label for="newName">Nome do Lembrete:</label>
+                    <input type="text" id="newName" class="item-1 marginFirst" placeholder="Insira um nome:" required>
+                </div>
+                <div class="item-1 newReminderElement">
+                    <label for="newInterval">Data final:</label>
+                    <input type="date" min="16-09-2023" max="30-12-2050" id="newInterval" class="item-1" required>
+                </div>
+            </div>
+            <div class="newReminderElement">
+                <label for="newDescription">Descrição do Lembrete:</label>
+                <input type="textarea" id="newDescription" class="item-1" placeholder="Descrição:">
+            </div>
+            <div class="itemsLine checkboxes">
+                <label for="newSendEmail">Enviar Email ?</label>
+                <input type="checkbox" id="newSendEmail" class="item-2"  name="newSendEmail" value="emChecked" onchange="toggleEmailInput()">
+                <label for="newRecurring">Lembrete recorrente ?</label>
+                <input type="checkbox" class="item-2" id="newRecurring" value="recChecked">
+            </div>
+            <div class="itemsLine emailElement">
+                <input type="email" id="newEmail" name="newEmail" placeholder="Insira o email para onde será enviado o lembrete:">
+            </div>
+            <div class="itemsLine justCenter">
+                <button onclick="newReminder()" id="newReminderBtn" class="addBtn">Adicionar Lembrete</button>
+            </div>
+        </section>
+
+        <section class="items">
+            <table id="myTable">
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Data final</th>
+                    <th>Enviar email</th>
+                    <th>Email</th>
+                    <th>Lembrete recorrente</th>
+                    <th><img width="20" height="20" src="images/trash.png" alt="trash"/></th>
+                    <th><img width="20" height="20" src="images/edit.png" alt="edit-file"/></th>
+                </tr>
+            </table>
+        </section>
+        <footer>
+            <span>Lembretes © 2023 </span>
+            <span>Ícones by <a href="https://icons8.com"> Icons8</a></span>
+        </footer>
+
+        <!-- start of Modal -->
+        <div id="myModal" class="modal">
+            <div class="modalContent">
+                <div class="newReminder modalContainer wrap">
+                    <span class="close">&times;</span>
+                    <h3>Editar lembrete:</h3>
+                    <div class="itemsLine">
+                        <input type="hidden" id="updId">
+                        <input type="text" id="updName" class="item-1 marginFirst" placeholder="Nome do lembrete:">
+                        <input type="date" min="16-09-2023" max="30-12-2050" id="updInterval" class="item-1" placeholder="Data final:dd-mm-aaaa">
+                    </div>
+                    <div class="itemsLine">
+                        <input type="textarea" id="updDescription" class="item-1" placeholder="Descrição:">
+                    </div>
+                    <div class="itemsLine checkboxes">
+                        <label for="updSendEmail">Enviar Email ?</label>
+                        <input type="checkbox" id="updSendEmail" class="item-2"  name="updSendEmail" value="emModalChecked" onchange="toggleModalEmailInput()">
+                        <label for="updRecurring">Lembrete recorrente ?</label>
+                        <input type="checkbox" class="item-2" id="updRecurring" value="recModalChecked">
+                    </div>
+                    <div class="emailElementModal">
+                        <input type="email" id="updEmail" placeholder="Insira ou altere o email para onde será enviado o lembrete:">
+                    </div>
+                    <div class="itemsLine justCenter">
+                        <button onclick="updateReminder()" id="updBtn" class="addBtn">Atualizar Lembrete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of modal -->
+        <script src="scripts.js"></script>
+    </body>
+</html>
