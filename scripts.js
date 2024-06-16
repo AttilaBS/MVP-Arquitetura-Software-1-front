@@ -46,6 +46,9 @@ const getList = async () => {
         inputEmail,
         inputRecurring
       ) => {
+        const newReminderBtn = document.getElementById('newReminderBtn');
+        newReminderBtn.setAttribute('disabled', '');
+        newReminderBtn.style.backgroundColor = 'gray';
         const formData = new FormData();
         formData.append('name', inputName);
         formData.append('description', inputDescription);
@@ -59,31 +62,32 @@ const getList = async () => {
           body: formData
         })
         .then((response) =>  {
-          status = response.status;
+          httpStatus = response.status;
           return response.json();
         })
-          .then(data => {
-            if (!status.ok) {
-              console.warn(data);
-              const errors = [];
-              data.forEach(error => {
-                errors.push(`- ${error.msg}`);
-              });
-              alert(errors);
+        .then(data => {
+          if (httpStatus !== 200
+            && httpStatus !== 201
+          ) {
+            const errors = [];
+            data.forEach(error => {
+              errors.push(`- ${error.ctx.error}`);
+            });
+            alert(errors);
+          } else {
+            if (inputSendEmail === false) {
+              alert('Lembrete adicionado!');
             } else {
-              let newReminderBtn = document.getElementById('newReminderBtn');
-              newReminderBtn.setAttribute('disabled', '');
-              newReminderBtn.style.backgroundColor = 'gray';
-              if (inputSendEmail === false) {
-                alert('Lembrete adicionado!');
-              } else {
-                alert('Lembrete adicionado e email enviado!');
-              }
-              newReminderBtn.removeAttribute('disabled');
-              location.reload();
-              getList();
+              alert('Lembrete adicionado e email enviado!');
             }
-          });
+            location.reload();
+            getList();
+          }
+        })
+        .finally(() => {
+          newReminderBtn.removeAttribute('disabled');
+          newReminderBtn.style.backgroundColor = '#8bca93';
+        });
       }
 
       /*
@@ -293,7 +297,6 @@ const getList = async () => {
         modalEmail.value = email;
         modalSendEmail.checked = sendEmail;
         modalRecurring.checked = recurring;
-        toggleModalEmailInput();
       }
       updtBtn = document.getElementById('updBtn');
       updtBtn.onclick = function () {
@@ -337,8 +340,9 @@ const getList = async () => {
           inputName === ''
           || inputDescription === ''
           || inputInterval === ''
+          || inputEmail === ''
         ) {
-          alert('Os campos nome, descrição e data final são obrigatórios!');
+          alert('Os campos nome, descrição, email e data final são obrigatórios!');
         } else if (inputSendEmail && !inputEmail) {
           alert('O campo enviar email foi selecionado, mas o email está vazio!');
         } else {
@@ -429,34 +433,4 @@ const getList = async () => {
       
         removeElement()
         updateElement()
-      }
-
-      /*
-        ------------------------------------------------------------------------
-        Function to display the email field only when send email is checked.
-        ------------------------------------------------------------------------
-      */
-      const toggleEmailInput = () => {
-        let sendEmailCheckBox = document.getElementById('newSendEmail');
-        let emailElement = document.getElementsByClassName('emailElement')[0];
-        if (sendEmailCheckBox.checked) {
-          emailElement.style.display = 'flex';
-        } else {
-          emailElement.style.display = 'none';
-        }
-      }
-
-      /*
-        ------------------------------------------------------------------------
-        Function to display the modal's email field only when sending an email.
-        ------------------------------------------------------------------------
-      */
-      const toggleModalEmailInput = () => {
-        let updSendEmailCheckBox = document.getElementById('updSendEmail');
-        let updEmailElement = document.getElementsByClassName('emailElementModal')[0];
-        if (updSendEmailCheckBox.checked) {
-          updEmailElement.style.display = 'flex';
-        } else {
-          updEmailElement.style.display = 'none';
-        }
       }
