@@ -58,26 +58,34 @@ const getList = async () => {
           method: 'post',
           body: formData
         })
-          .then((response) => {
-            if (response.status !== 200) {
-              console.log(response);
-              alert('Ocorreu um erro ao salvar o lembrete!');
+        .then((response) =>  {
+          status = response.status;
+          return response.json();
+        })
+          .then(data => {
+            if (!status.ok) {
+              console.warn(data);
+              const errors = [];
+              data.forEach(error => {
+                errors.push(`- ${error.msg}`);
+              });
+              alert(errors);
             } else {
+              let newReminderBtn = document.getElementById('newReminderBtn');
+              newReminderBtn.setAttribute('disabled', '');
+              newReminderBtn.style.backgroundColor = 'gray';
               if (inputSendEmail === false) {
                 alert('Lembrete adicionado!');
               } else {
                 alert('Lembrete adicionado e email enviado!');
               }
+              newReminderBtn.removeAttribute('disabled');
+              location.reload();
+              getList();
             }
-            location.reload()
-            getList()
-          })
-            .catch((error) => {
-              console.log(body);
-              alert('Error:', error);
-            });
+          });
       }
-      
+
       /*
         ------------------------------------------------------------------------
         Function to create a remove button for each list item.
@@ -315,7 +323,7 @@ const getList = async () => {
 
       /*
         ------------------------------------------------------------------------
-        Function to add a new reminder. 
+        Function to add a new reminder.
         ------------------------------------------------------------------------
       */
       const newReminder = () => {
@@ -325,17 +333,14 @@ const getList = async () => {
         let inputSendEmail = document.getElementById('newSendEmail').checked;
         let inputEmail = document.getElementById('newEmail').value;
         let inputRecurring = document.getElementById('newRecurring').checked;
-        const regex = /[^0-9]/;
         if (
-          inputName === '' 
-          || inputDescription === '' 
+          inputName === ''
+          || inputDescription === ''
           || inputInterval === ''
         ) {
           alert('Os campos nome, descrição e data final são obrigatórios!');
         } else if (inputSendEmail && !inputEmail) {
           alert('O campo enviar email foi selecionado, mas o email está vazio!');
-        } else if (!inputName.match(regex)) {
-          alert('O campo nome só pode conter letras!')
         } else {
           // Comparing dates:
           // 1: Getting current datetime, UTC
@@ -357,11 +362,8 @@ const getList = async () => {
           if (newDueDateUTCInteger < nowNow) {
             return alert('A data final precisa ser igual ou maior do que hoje !');
           }
-          let newReminderBtn = document.getElementById('newReminderBtn');
           let body = document.body;
           body.classList.remove('validator');
-          newReminderBtn.setAttribute('disabled', '');
-          newReminderBtn.style.backgroundColor = 'gray';
           postItem(
             inputName,
             inputDescription,
