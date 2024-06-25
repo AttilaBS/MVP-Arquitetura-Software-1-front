@@ -434,3 +434,13 @@ const getList = async () => {
         removeElement()
         updateElement()
       }
+
+      /*
+        ------------------------------------------------------------------------
+        Function to get the current year, dinamically.
+        ------------------------------------------------------------------------
+      */
+     const getCurrentYear = () => {
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+     }
+     getCurrentYear();
