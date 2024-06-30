@@ -1,8 +1,5 @@
 # Lembretes front-end
 
-## Vídeo de demonstração da aplicação em funcionamento:
-    Link: <_TODO_>
-
 ## Descrição do projeto:
    Este repositório faz parte das exigências da sprint Arquitetura de Software
   da pós graduação da PUC-Rio, curso Engenharia de Software, turma de julho de 2023.
