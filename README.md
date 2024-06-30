@@ -6,7 +6,7 @@
 ## Descrição do projeto:
       Este projeto faz parte das exigências da sprint Arquitetura de Software
     da pós graduação da PUC-Rio, curso Engenharia de Software, turma de julho de 2023.
-    Neste projeto se encontra o front-end que faz chamadas às rotas de criação,
+    Neste repositório se encontra o front-end que faz chamadas às rotas de criação,
     edição, deleção, get de um lembrete e get de todos lembretes. Este serviço
     se conecta diretamente com o serviço api1.
 
