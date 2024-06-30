@@ -1,8 +1,7 @@
 # Usa a imagem oficial do Nginx do Docker Hub
 FROM nginx:alpine
 
-# Copia os arquivos estáticos para o diretório do Nginx
-COPY . /usr/share/nginx/html
+# Copia a configuração do Nginx
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Expõe a porta na qual o Nginx estará rodando
-EXPOSE 80
+COPY . /usr/share/nginx/html

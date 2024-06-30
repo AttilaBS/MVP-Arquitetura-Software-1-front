@@ -10,6 +10,7 @@ const getList = async () => {
     })
       .then((response) => response.json())
       .then((data) => {
+        data?.reminders?.sort((a, b) => b.id - a.id);
         data?.reminders?.forEach(item => insertList(
             item.id,
             item.name,
@@ -170,7 +171,6 @@ const getList = async () => {
         let i;
         for (i = 0; i < update.length; i++) {
           update[i].onclick = function () {
-            let test = document.getElementById('newDate');
             let div = this.parentElement.parentElement;
             const idItem = div.getElementsByTagName('td')[0].innerHTML;
             const nameItem = div.getElementsByTagName('td')[1].innerHTML;

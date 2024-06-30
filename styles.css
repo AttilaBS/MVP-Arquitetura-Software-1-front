@@ -6,7 +6,7 @@ li {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: antiquewhite;
+    background-color: #c6d4d9;
 }
 
 header {
@@ -16,25 +16,25 @@ header {
 }
 
 .title {
-    color: #333131;
+    color: #FFFFFF;
     width: 100%;
-    background-color: #dd8888;
+    background-color: #2b89ad;
     display: inline-block;
     padding: 2px 0px;
     position: sticky;
     top: 0px;
+    margin-bottom: 20px;
 }
 
 .newReminder {
-    background-color: antiquewhite;
-    padding: 25px 0 25px 0;
+    padding: 5px 0 10px 0;
     color: white;
 	margin: 0 auto;
 }
 
 .newReminder h3 {
     text-align: center;
-    color: #000;
+    color: #148bbb;
 }
 
 .newReminderElement {
@@ -55,6 +55,10 @@ header {
     flex: 1;
     text-align: center;
     margin: 5px;
+}
+
+.item-1 .emailElement input {
+    border-radius: 5px;
 }
 
 .item-2 {
@@ -81,7 +85,7 @@ header {
 }
 
 .newReminder label {
-    color: #000;
+    color: #148bbb;
     text-align: center;
 }
 
@@ -102,23 +106,24 @@ header {
 
 .addBtn {
     padding: 9px 10px;
-    background-color: #8bca93;
-    color: #333131;
+    background-color: #5bbbdf;
+    color: #FFFFFF;
     font-weight: bold;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
     border-radius: 2px;
+    border: 1px solid #148bbb;
 }
 
 .validator .addBtn:hover {
-    background-color: #2ab53a;
+    background-color: #2b89ad;
     color: white;
 }
 
 .items {
-    margin: 0;
+    margin: 10px 0 0 0;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -142,8 +147,8 @@ header {
 table,
 th,
 td {
-    color: #333131;
-    border: 1px solid #a17373;
+    color: #fefefe;
+    border: 1.5px solid #a17373;
     border-collapse: collapse;
     cursor: pointer;
     position: relative;
@@ -163,12 +168,24 @@ th {
 }
 
 tr:nth-child(odd){
-    background-color: #f3dddd;
+    background-color: #5bbbdf;
 }
 
-tr:hover,
+tr:nth-child(even){
+    background-color: #abcfdb;
+}
+
 tr:first-of-type {
-    background: #cda8a8;
+    background: #2b89ad;
+}
+
+tr:not(:first-child):hover {
+    background: #2b89ad;
+    opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1.5s;
 }
 
 footer {
@@ -230,18 +247,18 @@ footer span {
 }
   
 .modalContent {
-    background-color: #fefefe;
+    background-color: #c6d4d9;
     margin: 15% auto;
     padding: 10px;
-    border: 1px solid #888;
+    border: 1px solid #148bbb;
     width: 70%;
+    border-radius: 5px;
 }
 
 .close {
     color: #000;
     position: absolute;
     right: 0;
-    margin-top: -30px;
     font-size: 28px;
     font-weight: bold;
 }
@@ -264,12 +281,48 @@ footer span {
     display: none;
 }
 
+#newDate {
+    color: #fefefe;
+    border-color: transparent;
+    background: inherit;
+}
+
 #updEmail {
     width: 50%;
 }
 
 .emailElementModal input {
     text-align: center;
+}
+
+input:focus-visible {
+    outline-color: #1491c2 !important;
+    opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1.5s;
+}
+
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+::placeholder, #newInterval {
+    color: #1491c2;
+}
+
+input {
+    color: #1491c2;
+}
+
+::-webkit-calendar-picker-indicator {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="%231491c2" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
 }
 
 /* Mobile */
