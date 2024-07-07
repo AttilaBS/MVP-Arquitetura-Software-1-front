@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="static/favicon.png">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Página de logout</title>
+</head>
+<body class="validator">
+    <header>
+        <div class="title">
+            <h2>Reminder Web</h2>
+        </div>
+    </header>
+    <section class="newReminder userContainer wrap">
+        <h2>Logout</h2>
+        <input type="text" id="usernameLogout" name="usernameLogout" placeholder="Nome de usuário" required>
+        <input type="password" id="passwordLogout" name="passwordLogout" placeholder="Senha" required>
+        <div class="itemsLine justCenter">
+            <button onclick="logoutUser()" id="logoutUserBtn" class="addBtn">Desconectar</button>
+        </div>
+    </section>
+    <footer>
+        <div>Reminder Web 2.0 ©<span id="year"></span></div>
+        <span>Ícones by <a href="https://icons8.com" target="_blank"> Icons8</a></span>
+    </footer>
+    <script src="/users.js"></script>
+</body>
+</html>

@@ -1,15 +1,37 @@
 /*
   ------------------------------------------------------------------------------
+  Function to obtain the existing authenticated user for subsequent requests.
+  ------------------------------------------------------------------------------
+*/
+function getCookie(name) {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
+/*
+  ------------------------------------------------------------------------------
   Function to obtain the existing list from the server via GET request.
   ------------------------------------------------------------------------------
 */
 const getList = async () => {
-    let url = 'http://127.0.0.1:5000/reminders';
+    let url = 'http://127.0.0.1:5000/reminders?username=' + getCookie('username');
     fetch(url, {
       method: 'get',
     })
-      .then((response) => response.json())
+      .then((response) => {
+        httpStatus = response.status;
+        return response.json();
+      })
       .then((data) => {
+        if (httpStatus === 403) {
+          throw data[0].ctx.error;
+        }
         data?.reminders?.sort((a, b) => b.id - a.id);
         data?.reminders?.forEach(item => insertList(
             item.id,
@@ -24,6 +46,10 @@ const getList = async () => {
       })
       .catch((error) => {
         console.error('Error:', error);
+        alert(error)
+        if (httpStatus === 403) {
+          window.location.href = '/register';
+        }
       });
   }
   
@@ -57,12 +83,12 @@ const getList = async () => {
         formData.append('send_email', inputSendEmail);
         formData.append('email', inputEmail);
         formData.append('recurring', inputRecurring);
-        let url = 'http://127.0.0.1:5000/create';
+        let url = 'http://127.0.0.1:5000/create?username=' + getCookie('username');
         fetch(url, {
           method: 'post',
           body: formData
         })
-        .then((response) =>  {
+        .then((response) => {
           httpStatus = response.status;
           return response.json();
         })
@@ -72,7 +98,11 @@ const getList = async () => {
           ) {
             const errors = [];
             data.forEach(error => {
-              errors.push(`- ${error.ctx.error}`);
+              if (error.hasOwnProperty('error')) {
+                errors.push(`- ${error.ctx.error}`);
+              } else {
+                errors.push(`- ${loc[0] - msg}`);
+              }
             });
             alert(errors);
           } else {
@@ -81,13 +111,11 @@ const getList = async () => {
             } else {
               alert('Lembrete adicionado e email enviado!');
             }
-            location.reload();
-            getList();
+            window.location.href = '/home';
           }
         })
         .finally(() => {
           newReminderBtn.removeAttribute('disabled');
-          newReminderBtn.style.backgroundColor = '#8bca93';
         });
       }
 
@@ -133,8 +161,8 @@ const getList = async () => {
               'Você tem certeza que quer remover o item de id: ' + idItem + '?'
               )
             ) {
-              div.remove()
               deleteReminder(idItem)
+              div.remove()
               alert('Removido!')
             }
           }
@@ -146,8 +174,8 @@ const getList = async () => {
         Function that makes the request to remove reminder from the server.
         ------------------------------------------------------------------------
       */
-      const deleteReminder = (id) => {
-        let url = 'http://127.0.0.1:5000/delete?id=' + id;
+      const deleteReminder = async (id) => {
+        let url = 'http://127.0.0.1:5000/delete?id=' + id + '&username=' + getCookie('username');
         fetch(url, {
           method: 'delete'
         })
@@ -214,14 +242,13 @@ const getList = async () => {
           formData.append('send_email', toUpdSendEmail);
           formData.append('email', toUpdEmail);
           formData.append('recurring', toUpdRecurring);
-          let url = 'http://127.0.0.1:5000/update'
+          let url = 'http://127.0.0.1:5000/update?username=' + getCookie('username');
           fetch(url, {
             method: 'put',
             body: formData
           })
             .then((response) => {
               if (response.status !== 200) {
-                console.log(response);
                 alert('Ocorreu um erro ao atualizar o lembrete!');
               } else {
                 if (toUpdSendEmail === false || toUpdEmail === '') {
@@ -229,8 +256,7 @@ const getList = async () => {
                 } else {
                   alert('Lembrete atualizado e email enviado!');
                 }
-                location.reload()
-                getList()
+                window.location.href = '/home';
               }
             })
             .catch((error) => {
@@ -381,7 +407,7 @@ const getList = async () => {
       
       /*
         ------------------------------------------------------------------------
-        Function to insert items into the list presented in the frontend.
+        Function to insert items into the list presented at the frontend.
         ------------------------------------------------------------------------
       */
       const insertList = (
@@ -440,7 +466,7 @@ const getList = async () => {
         Function to get the current year, dinamically.
         ------------------------------------------------------------------------
       */
-     const getCurrentYear = () => {
-        document.getElementById("year").innerHTML = new Date().getFullYear();
-     }
-     getCurrentYear();
+      const getCurrentYear = () => {
+        document.getElementById('year').innerHTML = new Date().getFullYear();
+      }
+      getCurrentYear();

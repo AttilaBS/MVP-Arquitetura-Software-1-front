@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="static/favicon.png">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Página de login</title>
+</head>
+<body class="validator">
+    <header>
+        <div class="title">
+            <h2>Reminder Web</h2>
+        </div>
+    </header>
+    <section class="newReminder userContainer wrap">
+        <h2>Login</h2>
+        <input type="text" id="usernameLogin" name="usernameLogin" placeholder="Nome de usuário" required>
+        <input type="password" id="passwordLogin" name="passwordLogin" placeholder="Senha" required>
+        <div class="itemsLine justCenter">
+            <button onclick="loginUser()" id="loginUserBtn" class="addBtn">Efetuar login</button>
+        </div>
+        <p>Não possui uma conta? <a href="/register"> Cadastro</a></p>
+    </section>
+    <footer>
+        <div>Reminder Web 2.0 ©<span id="year"></span></div>
+        <span>Ícones by <a href="https://icons8.com" target="_blank"> Icons8</a></span>
+    </footer>
+    <script src="/users.js"></script>
+</body>
+</html>
