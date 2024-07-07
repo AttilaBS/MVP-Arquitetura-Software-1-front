@@ -9,21 +9,13 @@ li {
     background-color: #c6d4d9;
 }
 
-header {
-    text-align: center;
-    position: relative;
-    width: 100%;
-}
-
 .title {
     color: #FFFFFF;
-    width: 100%;
-    background-color: #2b89ad;
-    display: inline-block;
     padding: 2px 0px;
-    position: sticky;
     top: 0px;
-    margin-bottom: 20px;
+    text-align: left;
+    margin-left: 5%;
+    flex: 4;
 }
 
 .newReminder {
@@ -298,10 +290,10 @@ footer span {
 input:focus-visible {
     outline-color: #1491c2 !important;
     opacity: 1;
-	animation-name: fadeInOpacity;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in;
-	animation-duration: 1.5s;
+    animation-name: fadeInOpacity;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 1.5s;
 }
 
 @keyframes fadeInOpacity {
@@ -339,6 +331,34 @@ input {
 .userContainer h2, p {
     color: #2b89ad;
     text-align: center;
+}
+
+header {
+    text-align: center;
+    display: flex;
+    background-color: #2b89ad;
+}
+
+.menu {
+    display: flex;
+    flex-direction:column;
+    justify-content: space-around;
+    flex: 1;
+}
+
+.menu button {
+    background-color: #2b89ad;
+    border: none;
+    color: #FFFFFF;
+    font-size: 17px;
+    font-family: Tahoma;
+    cursor: pointer;
+}
+
+header .menu,
+header span,
+header a {
+    color: #FFFFFF;
 }
 
 /* Mobile */

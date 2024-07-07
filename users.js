@@ -29,13 +29,35 @@ function getCookie(name) {
   return null;
 }
 
+  /*
+  ------------------------------------------------------------------------
+  Function to show current user at menu.
+  ------------------------------------------------------------------------
+*/
+const currentUser = (elementId, text) => {
+  let currentUrl = window.location.href;
+  if (currentUrl === 'http://localhost:3000/home'
+    || currentUrl === 'http://localhost:3000/logout'
+  ) {
+    const element = document.getElementById('userName');
+  if (element) {
+      const textNode = document.createTextNode(text);
+      element.appendChild(textNode);
+  } else {
+      console.error(`Element with ID '${elementId}' not found.`);
+  }
+  }
+}
+
+currentUser('userName', getCookie('username'));
+
 /*
   ------------------------------------------------------------------------------
   Function to verify if user is logged in and redirect if it is the case.
   ------------------------------------------------------------------------------
 */
 function checkAndRedirect() {
-  currentUrl = window.location.href;
+  let currentUrl = window.location.href;
   if (getCookie('username')
     && currentUrl !== 'http://localhost:3000/logout'
   ) {
@@ -45,9 +67,8 @@ function checkAndRedirect() {
     window.location.href = '/login';
   }
 }
-
-// Execute the function when the page starts loading
 window.onload = checkAndRedirect;
+
 /*
   ------------------------------------------------------------------------
   Function to add a new user.
@@ -149,14 +170,17 @@ const logoutUser = async () => {
       return response.json();
   })
   .then(data => {
+    console.log(data)
     if (httpStatus !== 200
       && httpStatus !== 201
     ) {
+      console.log(data)
       throw data[0].ctx.error;
     } else {
       if (data.username === getCookie('username')) {
         document.cookie = 'username' + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         alert('Você se deslogou com sucesso!');
+        window.location.href = '/login';
       } else {
         throw 'Ocorreu um erro ao se deslogar!';
       }
@@ -165,9 +189,6 @@ const logoutUser = async () => {
   .catch((error) => {
     console.error('Error:', error);
     alert(error)
-  })
-  .finally(() => {
-    window.location.href = '/login';
   });
 }
 
@@ -187,4 +208,41 @@ const validateInputs = (username, password) => {
   if (message.length > 0) {
     return alert(message);
   }
+}
+
+/*
+  ------------------------------------------------------------------------
+  Function to get the current year, dinamically.
+  ------------------------------------------------------------------------
+*/
+const getCurrentYear = () => {
+  document.getElementById('year').innerHTML = new Date().getFullYear();
+}
+getCurrentYear();
+
+/*
+  ------------------------------------------------------------------------
+  Function to redirect to home page.
+  ------------------------------------------------------------------------
+*/
+const goToHome = () => {
+  window.location.href = '/home';
+}
+
+/*
+  ------------------------------------------------------------------------
+  Function to redirect to register page.
+  ------------------------------------------------------------------------
+*/
+const goToRegister = () => {
+  window.location.href = '/register';
+}
+
+/*
+  ------------------------------------------------------------------------
+  Function to redirect to login page.
+  ------------------------------------------------------------------------
+*/
+const goToLogin = () => {
+  window.location.href = '/login';
 }
