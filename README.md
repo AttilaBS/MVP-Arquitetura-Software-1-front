@@ -4,8 +4,9 @@
    Este repositório faz parte das exigências da sprint Arquitetura de Software
   da pós graduação da PUC-Rio, curso Engenharia de Software, turma de julho de 2023.
    Neste repositório se encontra o front-end que faz chamadas às rotas de criação,
-  edição, deleção, busca de todos lembretes, além de criação, login e logout
-  de usuário. Este componente se conecta diretamente com o componente api1.
+  edição, deleção, busca de todos lembretes, além de criação, login e logout(validação)
+  de usuário (total de 6 rotas que são chamadas no componente api1).
+  Este componente se conecta diretamente com o componente api1.
 
    Esta aplicação foi iniciada na sprint Desenvolvimento Fullstack Básico.
   Nesta sprint, possui como melhorias a componentização mais granular, redesenho
