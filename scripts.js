@@ -115,7 +115,7 @@ const postItem = async (
     ) {
       const errors = [];
       data.forEach(error => {
-        if (error.hasOwnProperty('error')) {
+        if (error.hasOwnProperty('ctx')) {
           errors.push(`- ${error.ctx.error}`);
         } else {
           errors.push(`- ${loc[0] - msg}`);
@@ -133,6 +133,7 @@ const postItem = async (
   })
   .finally(() => {
     newReminderBtn.removeAttribute('disabled');
+    newReminderBtn.style.backgroundColor = '#5bbbdf';
   });
 }
 
@@ -278,6 +279,11 @@ const updateReminder = (
   })
   .catch((error) => {
     console.error('Error:', error);
+  })
+  .finally(() => {
+    const updateBtn = document.getElementById('updBtn');
+    updateBtn.removeAttribute('disabled');
+    updateBtn.style.backgroundColor = '#5bbbdf';
   });
 }
 
@@ -379,6 +385,7 @@ const newReminder = () => {
   let inputSendEmail = document.getElementById('newSendEmail').checked;
   let inputEmail = document.getElementById('newEmail').value;
   let inputRecurring = document.getElementById('newRecurring').checked;
+
   if (
     inputName === ''
     || inputDescription === ''
@@ -388,6 +395,8 @@ const newReminder = () => {
     alert('Os campos nome, descrição, email e data final são obrigatórios!');
   } else if (inputSendEmail && !inputEmail) {
     alert('O campo enviar email foi selecionado, mas o email está vazio!');
+  } else if (!validateEmail('newEmail')) {
+    alert('Endereço de email no formato inválido!');
   } else {
     // Comparing dates:
     // 1: Getting current datetime, UTC
@@ -495,4 +504,21 @@ getCurrentYear();
 */
 const goToLogout = () => {
   window.location.href = '/logout';
+}
+
+/*
+  ------------------------------------------------------------------------
+  Function to validate email syntax.
+  ------------------------------------------------------------------------
+*/
+function isValidEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  return re.test(String(email).toLowerCase());
+}
+
+const validateEmail = (emailElementId) => {
+  let email = document.getElementById(emailElementId).value;
+
+  return isValidEmail(email);
 }
